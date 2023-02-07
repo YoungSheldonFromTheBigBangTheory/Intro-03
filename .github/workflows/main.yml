@@ -1,5 +1,4 @@
 ---
-
 #################################
 
 #################################
@@ -32,11 +31,11 @@ name: Lint Code Base
 
 on:
 
- push:
+  push:
 
- pull_request:
+  pull_request:
 
- branches: [master, main]
+    branches: [master, main]
 
 
 
@@ -48,58 +47,58 @@ on:
 
 jobs:
 
- build:
+  build:
 
- # Name the Job
+    # Name the Job
 
- name: Lint Code Base
+    name: Lint Code Base
 
- # Set the agent to run on
+    # Set the agent to run on
 
- runs-on: ubuntu-latest
-
-
-
- ##################
-
- # Load all steps #
-
- ##################
-
- steps:
-
- ##########################
-
- # Checkout the code base #
-
- ##########################
-
- - name: Checkout Code
-
- uses: actions/checkout@v3
-
- with:
-
- # Full git history is needed to get a proper list of changed files within `super-linter`
-
- fetch-depth: 0
+    runs-on: ubuntu-latest
 
 
 
- ################################
+    ##################
 
- # Run Linter against code base #
+    # Load all steps #
 
- ################################
+    ##################
 
- - name: Lint Code Base
+    steps:
 
- uses: github/super-linter@v4
+      ##########################
 
- env:
+      # Checkout the code base #
 
- VALIDATE_ALL_CODEBASE: false
+      ##########################
 
- DEFAULT_BRANCH: master
+      - name: Checkout Code
 
- GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: actions/checkout@v3
+
+        with:
+
+          # Full git history is needed to get a proper list of changed files within `super-linter`
+
+          fetch-depth: 0
+
+
+
+      ################################
+
+      # Run Linter against code base #
+
+      ################################
+
+      - name: Lint Code Base
+
+        uses: github/super-linter@v4
+
+        env:
+
+          VALIDATE_ALL_CODEBASE: false
+
+          DEFAULT_BRANCH: master
+
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
